@@ -19,7 +19,7 @@ $ source venv/scripts/activate
 
 # For Mac
 $ source venv/bin/activate 3. Clone this project
-$ git clone https://github.com/pythonguru101/Neptune.git
+$ git clone https://github.com/badilladrian/Neptune.git
 
 # Then, Enter the project
 Install Requirements from 'requirements.txt'
