@@ -4,6 +4,8 @@ from tkinter import *
 from PIL import Image,ImageTk
 import tkinter as tk
 from tkinter import ttk
+import datetime
+from tkinter import messagebox
 
 
 app = tk.Tk()
@@ -20,21 +22,26 @@ L1.pack()
 cap = cv2.VideoCapture(0)
 
 
-def framseve():
-    i = 0
-    while(cap.isOpened()):
-        ret , frame = cap.read()
-        if ret == False:
-            break
-        cv2.imwrite('./data/Frame'+str(i)+'.jpg', frame)
-        #print('Read a new frame: ', frame)
-        i += 1
+# def framseve():
+#     i = 0
+#     while(cap.isOpened()):
+#         ret , frame = cap.read()
+#         if ret == False:
+#             break
+#         cv2.imwrite('./data/Frame'+str(i)+'.jpg', frame)
+#         #print('Read a new frame: ', frame)
+#         i += 1
 
+def singlePhoto():
+    image = Image.fromarray(img1)
+    time = str(datetime.datetime.now().today()).replace(":"," ")+".jpg"
+    image.save(time)
+    messagebox.showinfo("Information","Image Save Successfully.")
 
-login_button = ttk.Button( text="Start",command=framseve)
+login_button = ttk.Button( text="Start",command=singlePhoto)
 login_button.pack(fill='x',  pady=10)
 
-login_button = ttk.Button( text="Quit", command=app.quit)
+login_button = ttk.Button( text="Quit", command=app.quit())
 login_button.pack(fill='x',  pady=10)
 
 
@@ -45,9 +52,10 @@ while True:
     img1 = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     img = ImageTk.PhotoImage(Image.fromarray(img1))
     L1['image'] = img
-    app.update()
 
+    app.mainloop()
 
+cap.release()
 #start program
 app.mainloop()
 
