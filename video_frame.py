@@ -12,7 +12,8 @@ app = tk.Tk()
 
 app.title('Neptune Service')
 app.iconbitmap('logo.ico')
-app.geometry('800x730')
+app.geometry('900x700')
+app.config(bg='#2A3166')
 Label(app,text="Live Stream",font=("times new roman",30,"bold")).pack(pady=20)
 f1 = LabelFrame(app,bg="red")
 f1.pack()
@@ -33,16 +34,18 @@ cap = cv2.VideoCapture(0)
 #         i += 1
 
 def singlePhoto():
+    i = 0
     image = Image.fromarray(img1)
-    time = str(datetime.datetime.now().today()).replace(":"," ")+".jpg"
+    #time = str(datetime.datetime.now().today()).replace(":"," ")+".jpg"
+    time = str(i) + '.jpg'
     image.save(time)
-    messagebox.showinfo("Information","Image Save Successfully.")
+    messagebox.showinfo("Neptune Service","Image Save Successfully.")
 
-login_button = ttk.Button( text="Start",command=singlePhoto)
-login_button.pack(fill='x',  pady=10)
 
-login_button = ttk.Button( text="Quit", command=app.quit())
-login_button.pack(fill='x',  pady=10)
+Button(app,text="Capture",font=("times new roman",20,"bold"),bg="#23272b",fg="white",command=singlePhoto).pack(expand=True,pady=10,side = LEFT)
+Button(app,text="Exit",font=("times new roman",20,"bold"),bg="#e6bc15",fg="white",command=app.destroy).pack(expand=True,pady=10,side = LEFT)
+
+
 
 
 
@@ -52,8 +55,9 @@ while True:
     img1 = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     img = ImageTk.PhotoImage(Image.fromarray(img1))
     L1['image'] = img
+    L1.pack()
 
-    app.mainloop()
+    app.update()
 
 cap.release()
 #start program
